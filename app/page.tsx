@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div>
       {/* Header Navigation - Black Background with Logo */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black py-4 px-6 border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black py-3 px-4 md:px-6 border-b border-white/10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="#" className="flex-shrink-0">
             <Image
@@ -18,12 +18,12 @@ export default function Home() {
               alt="Wrecklessly Loved Ministries"
               width={500}
               height={100}
-              className="h-14 w-auto"
+              className="h-12 md:h-14 w-auto"
               priority
             />
           </a>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-3 md:gap-8">
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8 text-white text-lg">
               <a href="#about" className="hover:text-slate-300 transition-colors">About</a>
@@ -32,20 +32,20 @@ export default function Home() {
               <a href="#contact" className="hover:text-slate-300 transition-colors">Contact</a>
             </nav>
 
-            <a href="#give" className="px-6 py-3 bg-white text-black text-base md:text-lg font-bold rounded-lg hover:bg-slate-100 transition-colors">
+            <a href="#give" className="hidden md:block px-6 py-3 bg-white text-black text-lg font-bold rounded-lg hover:bg-slate-100 transition-colors">
               Give
             </a>
             
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-white p-2"
+              className="md:hidden text-white p-2 -mr-2"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
-                <XMarkIcon className="h-8 w-8" />
+                <XMarkIcon className="h-7 w-7" />
               ) : (
-                <Bars3Icon className="h-8 w-8" />
+                <Bars3Icon className="h-7 w-7" />
               )}
             </button>
           </div>
@@ -53,35 +53,42 @@ export default function Home() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="md:hidden absolute top-full left-0 right-0 bg-black border-b border-white/10 py-6 px-6">
-            <div className="flex flex-col gap-6 text-white text-xl">
+          <nav className="md:hidden absolute top-full left-0 right-0 bg-black border-b border-white/10 py-6 px-6 shadow-xl">
+            <div className="flex flex-col gap-5 text-white">
               <a 
                 href="#about" 
-                className="hover:text-slate-300 transition-colors"
+                className="text-xl font-medium hover:text-slate-300 transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 About
               </a>
               <a 
                 href="#team" 
-                className="hover:text-slate-300 transition-colors"
+                className="text-xl font-medium hover:text-slate-300 transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Team
               </a>
               <a 
                 href="#outreach" 
-                className="hover:text-slate-300 transition-colors"
+                className="text-xl font-medium hover:text-slate-300 transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Outreach
               </a>
               <a 
                 href="#contact" 
-                className="hover:text-slate-300 transition-colors"
+                className="text-xl font-medium hover:text-slate-300 transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Contact
+              </a>
+              <a 
+                href="#give" 
+                className="mt-4 px-6 py-4 bg-white text-black text-xl font-bold rounded-lg hover:bg-slate-100 transition-colors text-center"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Give
               </a>
             </div>
           </nav>
