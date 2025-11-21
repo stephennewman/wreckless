@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Wrecklessly Loved Ministries",
-  description: "Wrecklessly Loved Ministries",
+  title: "Recklessly Loved Ministries | Dedicated to the One",
+  description: "Reaching the lost, serving the hurting, and showing the love of Jesus with boldness. Founded by Pastors Seth & Amy Newman.",
 };
 
 export default function RootLayout({
