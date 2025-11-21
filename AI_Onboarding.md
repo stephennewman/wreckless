@@ -9,6 +9,24 @@
 
 ### November 21, 2025
 
+#### Typography Overhaul - Bold & Bigger
+- **Changed fonts:** Switched from Geist to **Montserrat** (headings) and **Inter** (body)
+- **Dramatically increased all font sizes:**
+  - Hero h1: text-9xl (was text-8xl) with font-black
+  - Section headings: text-7xl to text-8xl (was text-5xl to text-6xl)
+  - Subheadings: text-4xl to text-5xl (was text-2xl to text-3xl)
+  - Body text: text-2xl to text-3xl (was text-lg to text-xl)
+  - Buttons: text-2xl (was text-lg)
+  - Icons/emojis: text-7xl (was text-4xl)
+- **Enhanced visual hierarchy:**
+  - Increased padding/spacing throughout (py-32 instead of py-24)
+  - Larger rounded corners (rounded-2xl, rounded-xl)
+  - Bigger buttons and form inputs
+  - More breathing room between sections
+- **Font weights:** Using black (900), bold (700), semibold (600), medium (500) for impact
+- **Result:** Much bolder, more confident, modern ministry aesthetic
+- **Committed:** "Update to bold Montserrat font and significantly larger text sizes throughout"
+
 #### Full Site Build - Complete Ministry Website
 - **Built comprehensive multi-section website** with content provided by Seth & Amy Newman
 - **Design approach:** Varied section styles inspired by Wesley Aggrey and Ross Johnston ministry sites
