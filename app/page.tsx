@@ -18,7 +18,7 @@ export default function Home() {
               alt="Recklessly Loved Ministries"
               width={500}
               height={100}
-              className="h-[72px] md:h-[84px] w-auto"
+              className="h-[61px] md:h-[71px] w-auto"
               priority
             />
           </a>
