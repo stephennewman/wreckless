@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [donorboxOpen, setDonorboxOpen] = useState(false);
   return (
     <div>
       {/* Header Navigation */}
@@ -31,9 +32,9 @@ export default function Home() {
               <a href="#contact" className="hover:text-gold-light transition-colors">Contact</a>
             </nav>
 
-            <a href="#give" className="hidden md:block px-6 py-3 bg-gold text-warm-black text-lg font-bold rounded-lg hover:bg-gold-light transition-colors">
+            <button onClick={() => setDonorboxOpen(true)} className="hidden md:block px-6 py-3 bg-gold text-warm-black text-lg font-bold rounded-lg hover:bg-gold-light transition-colors">
               Give
-            </a>
+            </button>
             
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -80,20 +81,19 @@ export default function Home() {
               >
                 Contact
               </a>
-              <a 
-                href="#give" 
+              <button 
                 className="mt-4 px-6 py-4 bg-gold text-warm-black text-xl font-bold rounded-lg hover:bg-gold-light transition-colors text-center"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => { setMobileMenuOpen(false); setDonorboxOpen(true); }}
               >
                 Give
-              </a>
+              </button>
             </div>
           </nav>
         )}
       </header>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center text-white pt-48 pb-20" style={{backgroundImage: 'url(/greg-rosenke-UTY4N-NU6Wg-unsplash.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+      <section className="relative min-h-screen flex items-center justify-center text-white pt-48 pb-20" style={{backgroundImage: 'url(/nick-berger-ZS0sUE45oVQ-unsplash.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0 bg-warm-black/55"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-normal mb-12 tracking-wide leading-tight uppercase">
@@ -202,7 +202,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-6xl md:text-7xl font-black text-warm-dark mb-6">
-              Our Team
+              Our Story
             </h2>
             <p className="text-3xl text-warm-gray font-medium">
               Passionate in heart, committed in action
@@ -210,7 +210,7 @@ export default function Home() {
           </div>
           
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h3 className="text-5xl font-bold text-warm-dark mb-6">Lead Pastors</h3>
+            <h3 className="text-5xl font-bold text-warm-dark mb-6">Pastors & Evangelists</h3>
             <h4 className="text-4xl font-semibold text-gold-dark mb-8">Seth & Amy Newman</h4>
             <p className="text-2xl text-warm-gray leading-relaxed">
               Launching the ministry and overseeing vision, outreach, and prayer ministry.
@@ -292,7 +292,7 @@ export default function Home() {
             Thank you for standing with us as we serve the One who loves us so recklessly.
           </p>
 
-          <button className="px-16 py-6 bg-gold text-warm-black font-bold rounded-xl hover:bg-gold-light transition-colors text-2xl">
+          <button onClick={() => setDonorboxOpen(true)} className="px-16 py-6 bg-gold text-warm-black font-bold rounded-xl hover:bg-gold-light transition-colors text-2xl">
             Give Now
           </button>
         </div>
@@ -355,6 +355,28 @@ export default function Home() {
           © 2025 Recklessly Loved Ministries. All rights reserved.
         </p>
       </footer>
+
+      {/* Donorbox Modal */}
+      {donorboxOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4" onClick={() => setDonorboxOpen(false)}>
+          <div className="relative" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setDonorboxOpen(false)}
+              className="absolute -top-10 -right-1 text-white/80 hover:text-white text-lg font-semibold flex items-center gap-2 transition-colors"
+            >
+              Close <XMarkIcon className="h-6 w-6" />
+            </button>
+            <iframe
+              src="https://donorbox.org/embed/recklessly-loved-ministries"
+              name="donorbox"
+              seamless
+              allow="payment"
+              style={{ width: '425px', height: '720px' }}
+              className="border-0 shadow-2xl max-w-[calc(100vw-2rem)] max-h-[calc(100vh-4rem)]"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
