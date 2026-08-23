@@ -5,15 +5,13 @@ import { PlusIcon, HeartIcon, UserGroupIcon } from "@heroicons/react/24/solid";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
-const mediaItems = [
-  {
-    title: "Be Loud with Seth & Amy Newman of Recklessly Loved Ministries",
-    caption: "Be Loud with Seth & Amy Newman on WBVP-WMBA — 8/8/26.",
-    embedSrc:
-      "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1724500402194619%2F&show_text=true&width=560&t=0",
-    videoUrl: "https://www.facebook.com/watch/?v=1724500402194619",
-  },
-];
+const FACEBOOK_PAGE_URL = "https://www.facebook.com/RecklesslyLoved1313";
+
+function facebookTimelineSrc(width: number, height: number) {
+  return `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
+    FACEBOOK_PAGE_URL
+  )}&tabs=timeline&width=${width}&height=${height}&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false`;
+}
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -296,34 +294,64 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-12">
-            {mediaItems.map((item) => (
-              <div key={item.videoUrl} className="text-center max-w-[560px] w-full">
-                <iframe
-                  src={item.embedSrc}
-                  width="560"
-                  height="429"
-                  className="max-w-full rounded-2xl border border-gold/30 shadow-xl bg-white"
-                  style={{ overflow: 'hidden' }}
-                  scrolling="no"
-                  frameBorder="0"
-                  allowFullScreen
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  title={item.title}
-                />
-                <p className="mt-6 text-xl text-warm-gray">
-                  {item.caption}{' '}
-                  <a
-                    href={item.videoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gold-dark underline hover:text-gold transition-colors"
-                  >
-                    Watch on Facebook
-                  </a>
-                </p>
+          <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+            <div className="text-center md:text-left order-2 md:order-1">
+              <h3 className="text-5xl font-bold text-warm-dark mb-8">Follow the Journey</h3>
+              <p className="text-2xl text-warm-gray leading-relaxed mb-6">
+                Every outreach, interview, and testimony is shared live on our Facebook page — and the latest always shows up right here.
+              </p>
+              <p className="text-2xl text-warm-gray leading-relaxed mb-10">
+                Follow along and be part of what God is doing.
+              </p>
+              <a
+                href={FACEBOOK_PAGE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-10 py-5 bg-gold text-warm-black text-xl font-bold rounded-lg hover:bg-gold-light transition-colors"
+              >
+                Follow on Facebook
+              </a>
+            </div>
+
+            <div className="order-1 md:order-2 flex justify-center">
+              <div className="bg-warm-black rounded-3xl p-3 md:p-4 shadow-2xl border border-gold/30 inline-block">
+                <div className="flex items-center justify-between px-3 pb-3 pt-1">
+                  <p className="text-gold-light text-lg font-semibold tracking-wide uppercase">Live from Facebook</p>
+                  <span className="flex items-center gap-2 text-white/60 text-sm">
+                    <span className="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
+                    Updates automatically
+                  </span>
+                </div>
+                {/* Facebook fixes the plugin width when it loads, so render a
+                    narrower embed on small screens and a wider one on md+. */}
+                <div className="md:hidden">
+                  <iframe
+                    src={facebookTimelineSrc(320, 560)}
+                    width="320"
+                    height="560"
+                    className="rounded-2xl bg-white block"
+                    style={{ overflow: 'hidden' }}
+                    scrolling="no"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    title="Recklessly Loved Ministries on Facebook"
+                  />
+                </div>
+                <div className="hidden md:block">
+                  <iframe
+                    src={facebookTimelineSrc(420, 640)}
+                    width="420"
+                    height="640"
+                    className="rounded-2xl bg-white block"
+                    style={{ overflow: 'hidden' }}
+                    scrolling="no"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    title="Recklessly Loved Ministries on Facebook"
+                  />
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
