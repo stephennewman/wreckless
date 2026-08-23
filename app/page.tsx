@@ -314,14 +314,7 @@ export default function Home() {
             </div>
 
             <div className="order-1 md:order-2 flex justify-center">
-              <div className="bg-warm-black rounded-3xl p-3 md:p-4 shadow-2xl border border-gold/30 inline-block">
-                <div className="flex items-center justify-between px-3 pb-3 pt-1">
-                  <p className="text-gold-light text-lg font-semibold tracking-wide uppercase">Live from Facebook</p>
-                  <span className="flex items-center gap-2 text-white/60 text-sm">
-                    <span className="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
-                    Updates automatically
-                  </span>
-                </div>
+              <div className="bg-warm-black rounded-3xl p-2.5 shadow-2xl border border-gold/30 inline-block">
                 {/* Facebook fixes the plugin width when it loads, so render a
                     narrower embed on small screens and a wider one on md+. */}
                 <div className="md:hidden">
