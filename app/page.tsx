@@ -5,6 +5,16 @@ import { PlusIcon, HeartIcon, UserGroupIcon } from "@heroicons/react/24/solid";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
+const mediaItems = [
+  {
+    title: "Be Loud with Seth & Amy Newman of Recklessly Loved Ministries",
+    caption: "Be Loud with Seth & Amy Newman on WBVP-WMBA — 8/8/26.",
+    embedSrc:
+      "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1724500402194619%2F&show_text=true&width=560&t=0",
+    videoUrl: "https://www.facebook.com/watch/?v=1724500402194619",
+  },
+];
+
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [donorboxOpen, setDonorboxOpen] = useState(false);
@@ -29,6 +39,7 @@ export default function Home() {
               <a href="#about" className="hover:text-gold-light transition-colors">About</a>
               <a href="#team" className="hover:text-gold-light transition-colors">Team</a>
               <a href="#outreach" className="hover:text-gold-light transition-colors">Outreach</a>
+              <a href="#media" className="hover:text-gold-light transition-colors">Media</a>
               <a href="#contact" className="hover:text-gold-light transition-colors">Contact</a>
             </nav>
 
@@ -73,6 +84,13 @@ export default function Home() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Outreach
+              </a>
+              <a 
+                href="#media" 
+                className="text-xl font-medium hover:text-gold-light transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Media
               </a>
               <a 
                 href="#contact" 
@@ -265,6 +283,51 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Recent Media */}
+      <section id="media" className="py-32 bg-cream">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-6xl md:text-7xl font-black text-warm-dark mb-6">
+              Recent Media
+            </h2>
+            <div className="w-32 h-2 bg-gold mx-auto mb-10"></div>
+            <p className="text-2xl md:text-3xl text-warm-gray leading-relaxed max-w-4xl mx-auto">
+              Watch and listen to the ministry in action — interviews, outreach moments, and messages worth sharing.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-12">
+            {mediaItems.map((item) => (
+              <div key={item.videoUrl} className="text-center max-w-[560px] w-full">
+                <iframe
+                  src={item.embedSrc}
+                  width="560"
+                  height="429"
+                  className="max-w-full rounded-2xl border border-gold/30 shadow-xl bg-white"
+                  style={{ overflow: 'hidden' }}
+                  scrolling="no"
+                  frameBorder="0"
+                  allowFullScreen
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  title={item.title}
+                />
+                <p className="mt-6 text-xl text-warm-gray">
+                  {item.caption}{' '}
+                  <a
+                    href={item.videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gold-dark underline hover:text-gold transition-colors"
+                  >
+                    Watch on Facebook
+                  </a>
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Give Section */}
       <section id="give" className="py-32 relative" style={{backgroundImage: 'url(/tomasz-filipek-joOVC9d-jis-unsplash.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0 bg-cream/85"></div>
@@ -352,7 +415,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-10 bg-warm-black text-white/50 text-center border-t border-gold/15">
         <p className="text-xl">
-          © 2025 Recklessly Loved Ministries. All rights reserved.
+          © 2026 Recklessly Loved Ministries. All rights reserved.
         </p>
       </footer>
 
