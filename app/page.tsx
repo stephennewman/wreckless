@@ -534,27 +534,29 @@ export default function Home() {
           </div>
 
           {/* About the Author */}
-          <div className="max-w-3xl mx-auto border-t border-mauve/20 pt-20">
+          <div className="max-w-5xl mx-auto border-t border-mauve/20 pt-20 grid md:grid-cols-[auto_1fr] gap-10 md:gap-14 items-center text-center md:text-left">
             <Image
               src="/amy_newman_two_babies_in_heaven_author.jpeg"
               alt="Amy Newman, author"
               width={427}
               height={640}
-              className="mx-auto w-48 md:w-56 h-auto rounded-2xl shadow-xl mb-10"
+              className="mx-auto w-56 md:w-72 h-auto rounded-2xl shadow-xl"
             />
-            <h3 className="text-4xl md:text-5xl font-bold text-warm-dark mb-6">About the Author</h3>
-            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed mb-6">
-              Amy Newman is a wife, mother, evangelist, pastor, and author. She is a
-              co-founder and Vice President of Recklessly Loved Ministries, the
-              evangelistic ministry she founded with her husband in 2019.
-            </p>
-            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed">
-              Her desire is to reach people from all walks of life with the gospel of Jesus
-              Christ and to see women find healing and freedom from abortion, miscarriage,
-              and infertility. Her hope is that this book will inspire women everywhere to
-              see children as the blessing they truly are, and that lives would be changed
-              through the power of an ever-present Savior, Jesus Christ.
-            </p>
+            <div>
+              <h3 className="text-4xl md:text-5xl font-bold text-warm-dark mb-6">About the Author</h3>
+              <p className="text-xl md:text-2xl text-warm-gray leading-relaxed mb-6">
+                Amy Newman is a wife, mother, evangelist, pastor, and author. She is a
+                co-founder and Vice President of Recklessly Loved Ministries, the
+                evangelistic ministry she founded with her husband in 2019.
+              </p>
+              <p className="text-xl md:text-2xl text-warm-gray leading-relaxed">
+                Her desire is to reach people from all walks of life with the gospel of Jesus
+                Christ and to see women find healing and freedom from abortion, miscarriage,
+                and infertility. Her hope is that this book will inspire women everywhere to
+                see children as the blessing they truly are, and that lives would be changed
+                through the power of an ever-present Savior, Jesus Christ.
+              </p>
+            </div>
           </div>
         </div>
       </section>
