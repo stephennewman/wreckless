@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { PlusIcon, HeartIcon, UserGroupIcon } from "@heroicons/react/24/solid";
-import { Bars3Icon, XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon, ChevronLeftIcon, ChevronRightIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect, useCallback, type ReactNode } from "react";
 
 const FACEBOOK_PAGE_URL = "https://www.facebook.com/RecklesslyLoved1313";
@@ -20,6 +20,8 @@ function PurchaseLink({ className, children = "Purchase Now" }: { className: str
       className={className}
     >
       {children}
+      <ArrowTopRightOnSquareIcon className="inline-block h-[1em] w-[1em] ml-2 align-[-0.125em]" aria-hidden="true" />
+      <span className="sr-only">(opens in a new tab)</span>
     </a>
   );
 }
