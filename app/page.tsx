@@ -45,7 +45,7 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKey);
   }, [bookModalOpen]);
 
-  // Hero slider (0 = ministry, 1 = book launch)
+  // Hero slider (0 = book launch, 1 = ministry)
   const HERO_SLIDE_COUNT = 2;
   const [heroSlide, setHeroSlide] = useState(0);
   const goToSlide = useCallback((i: number) => {
@@ -180,11 +180,11 @@ export default function Home() {
       {/* Hero Slider */}
       {/* Slides share one grid cell so the hero grows to fit the tallest slide instead of clipping. */}
       <section className="relative grid min-h-screen overflow-hidden" aria-roledescription="carousel" aria-label="Featured">
-        {/* Slide 1 — Ministry */}
+        {/* Slide 2 — Ministry */}
         <div
-          className={`col-start-1 row-start-1 relative flex items-center justify-center pt-56 pb-28 text-white transition-[opacity,visibility] duration-1000 ease-in-out ${heroSlide === 0 ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+          className={`col-start-1 row-start-1 relative flex items-center justify-center pt-56 pb-28 text-white transition-[opacity,visibility] duration-1000 ease-in-out ${heroSlide === 1 ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
           style={{backgroundImage: 'url(/nick-berger-ZS0sUE45oVQ-unsplash.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}
-          aria-hidden={heroSlide !== 0}
+          aria-hidden={heroSlide !== 1}
         >
           <div className="absolute inset-0 bg-warm-black/55"></div>
           <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
@@ -205,10 +205,10 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Slide 2 — Book Launch */}
+        {/* Slide 1 — Book Launch */}
         <div
-          className={`col-start-1 row-start-1 relative flex items-center justify-center pt-48 pb-28 md:pt-52 bg-[radial-gradient(ellipse_at_top,#ffffff_0%,var(--color-blush)_75%)] transition-[opacity,visibility] duration-1000 ease-in-out ${heroSlide === 1 ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
-          aria-hidden={heroSlide !== 1}
+          className={`col-start-1 row-start-1 relative flex items-center justify-center pt-48 pb-28 md:pt-52 bg-[radial-gradient(ellipse_at_top,#ffffff_0%,var(--color-blush)_75%)] transition-[opacity,visibility] duration-1000 ease-in-out ${heroSlide === 0 ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+          aria-hidden={heroSlide !== 0}
         >
           <div className="max-w-4xl mx-auto px-6 text-center">
             <Image
@@ -265,7 +265,7 @@ export default function Home() {
               aria-label={`Go to slide ${i + 1}`}
               aria-current={heroSlide === i}
               className={`h-3 w-3 rounded-full transition-all ${
-                heroSlide === 1
+                heroSlide === 0
                   ? (heroSlide === i ? 'bg-mauve w-8' : 'bg-warm-dark/25 hover:bg-warm-dark/50')
                   : (heroSlide === i ? 'bg-gold-light w-8' : 'bg-white/40 hover:bg-white/70')
               }`}
