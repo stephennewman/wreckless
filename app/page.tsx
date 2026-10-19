@@ -96,9 +96,9 @@ export default function Home() {
             <nav className="hidden md:flex items-center gap-8 text-white/90 text-lg">
               <a href="#about" className="hover:text-gold-light transition-colors">About</a>
               <a href="#team" className="hover:text-gold-light transition-colors">Team</a>
-              <a href="#book" className="hover:text-gold-light transition-colors">Book</a>
               <a href="#outreach" className="hover:text-gold-light transition-colors">Outreach</a>
               <a href="#media" className="hover:text-gold-light transition-colors">Media</a>
+              <a href="#book" className="hover:text-gold-light transition-colors">Book</a>
               <a href="#contact" className="hover:text-gold-light transition-colors">Contact</a>
             </nav>
 
@@ -139,13 +139,6 @@ export default function Home() {
                 Team
               </a>
               <a 
-                href="#book" 
-                className="text-xl font-medium hover:text-gold-light transition-colors py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Book
-              </a>
-              <a 
                 href="#outreach" 
                 className="text-xl font-medium hover:text-gold-light transition-colors py-2"
                 onClick={() => setMobileMenuOpen(false)}
@@ -158,6 +151,13 @@ export default function Home() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Media
+              </a>
+              <a 
+                href="#book" 
+                className="text-xl font-medium hover:text-gold-light transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Book
               </a>
               <a 
                 href="#contact" 
@@ -384,65 +384,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Book — Two Babies in Heaven */}
-      <section id="book" className="py-32 bg-[radial-gradient(ellipse_at_top,#ffffff_0%,var(--color-blush)_75%)]">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <p className="text-mauve text-lg md:text-xl font-semibold tracking-[0.25em] uppercase mb-5">
-            New Book Release
-          </p>
-          <h2 className="text-6xl md:text-7xl font-black text-warm-dark mb-6">
-            Two Babies in Heaven
-          </h2>
-          <div className="w-32 h-2 bg-mauve mx-auto mb-8"></div>
-          <p className="text-2xl md:text-3xl text-warm-gray leading-relaxed mb-16">
-            A story of redemption, healing, and hope.
-          </p>
-
-          <Image
-            src="/twobabies_in_heaven_cover.png"
-            alt="Two Babies in Heaven — a book by Amy Newman"
-            width={1067}
-            height={1529}
-            className="mx-auto w-72 md:w-96 h-auto rounded-sm shadow-2xl shadow-warm-dark/30 mb-16"
-          />
-
-          <p className="text-xl md:text-2xl text-warm-gray leading-relaxed max-w-3xl mx-auto mb-12">
-            It is a story of lost life, new life, and the unshakable truth that God can redeem
-            even the darkest chapters of our story.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-28">
-            <PurchaseLink className={bookPrimaryButton} />
-            <button onClick={() => setBookModalOpen(true)} className={bookSecondaryButton}>
-              Learn More
-            </button>
-          </div>
-
-          {/* About the Author */}
-          <div className="max-w-3xl mx-auto border-t border-mauve/20 pt-20">
-            <Image
-              src="/amy_newman_two_babies_in_heaven_author.jpeg"
-              alt="Amy Newman, author"
-              width={427}
-              height={640}
-              className="mx-auto w-48 md:w-56 h-auto rounded-2xl shadow-xl mb-10"
-            />
-            <h3 className="text-4xl md:text-5xl font-bold text-warm-dark mb-6">About the Author</h3>
-            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed mb-6">
-              Amy Newman is a wife, mother, evangelist, pastor, and author. She is a
-              co-founder and Vice President of Recklessly Loved Ministries, the
-              evangelistic ministry she founded with her husband in 2019.
-            </p>
-            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed">
-              Her desire is to reach people from all walks of life with the gospel of Jesus
-              Christ and to see women find healing and freedom from abortion, miscarriage,
-              and infertility. Her hope is that this book will inspire women everywhere to
-              see children as the blessing they truly are, and that lives would be changed
-              through the power of an ever-present Savior, Jesus Christ.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Outreach & Impact */}
       <section id="outreach" className="py-32 relative text-white" style={{backgroundImage: 'url(/alexei-scutari-5Zg64OwXJg8-unsplash.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
         <div className="absolute inset-0 bg-warm-black/65"></div>
@@ -549,6 +490,65 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Book — Two Babies in Heaven */}
+      <section id="book" className="py-32 bg-[radial-gradient(ellipse_at_top,#ffffff_0%,var(--color-blush)_75%)]">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <p className="text-mauve text-lg md:text-xl font-semibold tracking-[0.25em] uppercase mb-5">
+            New Book Release
+          </p>
+          <h2 className="text-6xl md:text-7xl font-black text-warm-dark mb-6">
+            Two Babies in Heaven
+          </h2>
+          <div className="w-32 h-2 bg-mauve mx-auto mb-8"></div>
+          <p className="text-2xl md:text-3xl text-warm-gray leading-relaxed mb-16">
+            A story of redemption, healing, and hope.
+          </p>
+
+          <Image
+            src="/twobabies_in_heaven_cover.png"
+            alt="Two Babies in Heaven — a book by Amy Newman"
+            width={1067}
+            height={1529}
+            className="mx-auto w-72 md:w-96 h-auto rounded-sm shadow-2xl shadow-warm-dark/30 mb-16"
+          />
+
+          <p className="text-xl md:text-2xl text-warm-gray leading-relaxed max-w-3xl mx-auto mb-12">
+            It is a story of lost life, new life, and the unshakable truth that God can redeem
+            even the darkest chapters of our story.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-28">
+            <PurchaseLink className={bookPrimaryButton} />
+            <button onClick={() => setBookModalOpen(true)} className={bookSecondaryButton}>
+              Learn More
+            </button>
+          </div>
+
+          {/* About the Author */}
+          <div className="max-w-3xl mx-auto border-t border-mauve/20 pt-20">
+            <Image
+              src="/amy_newman_two_babies_in_heaven_author.jpeg"
+              alt="Amy Newman, author"
+              width={427}
+              height={640}
+              className="mx-auto w-48 md:w-56 h-auto rounded-2xl shadow-xl mb-10"
+            />
+            <h3 className="text-4xl md:text-5xl font-bold text-warm-dark mb-6">About the Author</h3>
+            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed mb-6">
+              Amy Newman is a wife, mother, evangelist, pastor, and author. She is a
+              co-founder and Vice President of Recklessly Loved Ministries, the
+              evangelistic ministry she founded with her husband in 2019.
+            </p>
+            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed">
+              Her desire is to reach people from all walks of life with the gospel of Jesus
+              Christ and to see women find healing and freedom from abortion, miscarriage,
+              and infertility. Her hope is that this book will inspire women everywhere to
+              see children as the blessing they truly are, and that lives would be changed
+              through the power of an ever-present Savior, Jesus Christ.
+            </p>
           </div>
         </div>
       </section>
