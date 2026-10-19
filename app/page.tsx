@@ -26,8 +26,8 @@ function PurchaseLink({ className, children = "Purchase Now" }: { className: str
   );
 }
 
-const bookPrimaryButton = "inline-block px-10 py-5 bg-mauve text-white text-xl font-bold rounded-lg hover:bg-mauve-dark transition-colors text-center";
-const bookSecondaryButton = "inline-block px-10 py-5 border-2 border-mauve text-mauve text-xl font-bold rounded-lg hover:bg-mauve hover:text-white transition-colors text-center";
+const bookPrimaryButton = "inline-block whitespace-nowrap px-10 py-5 bg-mauve text-white text-xl font-bold rounded-lg hover:bg-mauve-dark transition-colors text-center";
+const bookSecondaryButton = "inline-block whitespace-nowrap px-10 py-5 border-2 border-mauve text-mauve text-xl font-bold rounded-lg hover:bg-mauve hover:text-white transition-colors text-center";
 
 function facebookTimelineSrc(width: number, height: number) {
   return `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
@@ -212,32 +212,36 @@ export default function Home() {
           className={`col-start-1 row-start-1 relative flex items-center justify-center pt-48 pb-28 md:pt-52 bg-[radial-gradient(ellipse_at_top,#ffffff_0%,var(--color-blush)_75%)] transition-[opacity,visibility] duration-1000 ease-in-out ${heroSlide === 0 ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
           aria-hidden={heroSlide !== 0}
         >
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <Image
-              src="/twobabies_in_heaven_cover.png"
-              alt="Two Babies in Heaven — a book by Amy Newman"
-              width={1067}
-              height={1529}
-              className="mx-auto w-auto h-[32vh] min-h-[220px] max-h-[400px] rounded-sm shadow-2xl shadow-warm-dark/30 mb-10"
-              priority
-            />
-            <p className="text-mauve text-base md:text-lg font-semibold tracking-[0.25em] uppercase mb-4">
-              New Book Release
-            </p>
-            <h1 className="text-5xl md:text-7xl font-normal text-warm-dark tracking-wide uppercase leading-none mb-5">
-              Two Babies in Heaven
-            </h1>
-            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed mb-2">
-              A story of redemption, healing, and hope.
-            </p>
-            <p className="text-lg md:text-xl text-mauve mb-10">
-              by Amy Newman
-            </p>
-            <div className="flex flex-col sm:flex-row gap-5 justify-center">
-              <PurchaseLink className={bookPrimaryButton} />
-              <button onClick={() => setBookModalOpen(true)} className={bookSecondaryButton}>
-                Learn More
-              </button>
+          <div className="max-w-6xl w-full mx-auto px-6 md:px-24 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div className="flex justify-center md:justify-end">
+              <Image
+                src="/twobabies_in_heaven_flatlay.jpg"
+                alt="Two Babies in Heaven by Amy Newman, shown on a table with flowers"
+                width={1067}
+                height={1600}
+                className="w-auto h-[40vh] md:h-[62vh] min-h-[260px] max-h-[640px] rounded-2xl shadow-2xl shadow-warm-dark/25"
+                priority
+              />
+            </div>
+            <div className="text-center md:text-left">
+              <p className="text-mauve text-base md:text-lg font-semibold tracking-[0.25em] uppercase mb-4">
+                New Book Release
+              </p>
+              <h1 className="text-5xl md:text-7xl font-normal text-warm-dark tracking-wide uppercase leading-none mb-5 text-balance">
+                Two Babies in Heaven
+              </h1>
+              <p className="text-xl md:text-2xl text-warm-gray leading-relaxed mb-2 text-pretty">
+                A story of redemption, healing, and hope.
+              </p>
+              <p className="text-lg md:text-xl text-mauve mb-10">
+                by Amy Newman
+              </p>
+              <div className="flex flex-wrap gap-5 justify-center md:justify-start">
+                <PurchaseLink className={bookPrimaryButton} />
+                <button onClick={() => setBookModalOpen(true)} className={bookSecondaryButton}>
+                  Learn More
+                </button>
+              </div>
             </div>
           </div>
         </div>
