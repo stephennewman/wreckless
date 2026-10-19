@@ -11,6 +11,9 @@
   --warm-dark: #2A1F0E;
   --cream: #FDF8F0;
   --warm-gray: #6B5D4A;
+  --mauve: #7A5A6B;
+  --mauve-dark: #5E4453;
+  --blush: #F7EFF0;
 }
 
 @theme inline {
@@ -24,6 +27,9 @@
   --color-warm-dark: var(--warm-dark);
   --color-cream: var(--cream);
   --color-warm-gray: var(--warm-gray);
+  --color-mauve: var(--mauve);
+  --color-mauve-dark: var(--mauve-dark);
+  --color-blush: var(--blush);
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading);
 }

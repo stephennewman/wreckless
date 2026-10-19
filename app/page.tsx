@@ -2,10 +2,30 @@
 
 import Image from "next/image";
 import { PlusIcon, HeartIcon, UserGroupIcon } from "@heroicons/react/24/solid";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { Bars3Icon, XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useState, useEffect, useCallback, type ReactNode } from "react";
 
 const FACEBOOK_PAGE_URL = "https://www.facebook.com/RecklesslyLoved1313";
+
+// Paste the publisher's purchase URL here. While empty, "Purchase Now" links render but do nothing.
+const BOOK_PURCHASE_URL = "";
+
+function PurchaseLink({ className, children = "Purchase Now" }: { className: string; children?: ReactNode }) {
+  return (
+    <a
+      href={BOOK_PURCHASE_URL || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => { if (!BOOK_PURCHASE_URL) e.preventDefault(); }}
+      className={className}
+    >
+      {children}
+    </a>
+  );
+}
+
+const bookPrimaryButton = "inline-block px-10 py-5 bg-mauve text-white text-xl font-bold rounded-lg hover:bg-mauve-dark transition-colors text-center";
+const bookSecondaryButton = "inline-block px-10 py-5 border-2 border-mauve text-mauve text-xl font-bold rounded-lg hover:bg-mauve hover:text-white transition-colors text-center";
 
 function facebookTimelineSrc(width: number, height: number) {
   return `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
@@ -16,10 +36,50 @@ function facebookTimelineSrc(width: number, height: number) {
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [donorboxOpen, setDonorboxOpen] = useState(false);
+  const [bookModalOpen, setBookModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (!bookModalOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setBookModalOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [bookModalOpen]);
+
+  // Hero slider (0 = ministry, 1 = book launch)
+  const HERO_SLIDE_COUNT = 2;
+  const [heroSlide, setHeroSlide] = useState(0);
+  const goToSlide = useCallback((i: number) => {
+    setHeroSlide(((i % HERO_SLIDE_COUNT) + HERO_SLIDE_COUNT) % HERO_SLIDE_COUNT);
+  }, []);
+
+  // Auto-rotate every 8s; resets whenever the active slide changes (incl. manual nav).
+  useEffect(() => {
+    const id = setInterval(() => {
+      setHeroSlide((s) => (s + 1) % HERO_SLIDE_COUNT);
+    }, 8000);
+    return () => clearInterval(id);
+  }, [heroSlide]);
+
   return (
     <div>
       {/* Header Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-warm-black py-3 px-4 md:px-6 border-b border-gold/20">
+      <header className="fixed top-0 left-0 right-0 z-50">
+        {/* Book launch announcement bar */}
+        <div className="bg-blush text-warm-dark text-sm md:text-base py-2 px-4">
+          <div className="max-w-7xl mx-auto flex items-center justify-center gap-x-4 gap-y-1 flex-wrap text-center">
+            <span>
+              <span className="hidden sm:inline">New book from Amy Newman: </span>
+              <span className="font-semibold">Two Babies in Heaven</span>
+            </span>
+            <span className="flex items-center gap-4">
+              <PurchaseLink className="font-semibold text-mauve underline underline-offset-4 hover:text-mauve-dark" />
+              <button onClick={() => setBookModalOpen(true)} className="font-semibold text-mauve underline underline-offset-4 hover:text-mauve-dark">
+                Learn More
+              </button>
+            </span>
+          </div>
+        </div>
+        <div className="bg-warm-black py-3 px-4 md:px-6 border-b border-gold/20">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="#" className="flex-shrink-0">
             <Image
@@ -36,6 +96,7 @@ export default function Home() {
             <nav className="hidden md:flex items-center gap-8 text-white/90 text-lg">
               <a href="#about" className="hover:text-gold-light transition-colors">About</a>
               <a href="#team" className="hover:text-gold-light transition-colors">Team</a>
+              <a href="#book" className="hover:text-gold-light transition-colors">Book</a>
               <a href="#outreach" className="hover:text-gold-light transition-colors">Outreach</a>
               <a href="#media" className="hover:text-gold-light transition-colors">Media</a>
               <a href="#contact" className="hover:text-gold-light transition-colors">Contact</a>
@@ -58,6 +119,7 @@ export default function Home() {
             </button>
           </div>
         </div>
+        </div>
 
         {mobileMenuOpen && (
           <nav className="md:hidden absolute top-full left-0 right-0 bg-warm-black border-b border-gold/20 py-6 px-6 shadow-xl">
@@ -75,6 +137,13 @@ export default function Home() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Team
+              </a>
+              <a 
+                href="#book" 
+                className="text-xl font-medium hover:text-gold-light transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Book
               </a>
               <a 
                 href="#outreach" 
@@ -108,24 +177,100 @@ export default function Home() {
         )}
       </header>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center text-white pt-48 pb-20" style={{backgroundImage: 'url(/nick-berger-ZS0sUE45oVQ-unsplash.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}>
-        <div className="absolute inset-0 bg-warm-black/55"></div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-normal mb-12 tracking-wide leading-tight uppercase">
-            Dedicated to the One
-          </h1>
-          <p className="text-xl md:text-2xl mb-16 max-w-4xl mx-auto text-white/75 leading-relaxed">
-            "Three things will last forever — faith, hope and love — and the greatest of these is love." - 1 Corinthians 13:13
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a href="#about" className="px-12 py-6 bg-gold text-warm-black text-xl font-bold rounded-lg hover:bg-gold-light transition-colors">
-              Learn More
-            </a>
-            <a href="#contact" className="px-12 py-6 border-2 border-gold-light text-gold-light text-xl font-bold rounded-lg hover:bg-gold-light hover:text-warm-black transition-colors">
-              Join Us
-            </a>
+      {/* Hero Slider */}
+      {/* Slides share one grid cell so the hero grows to fit the tallest slide instead of clipping. */}
+      <section className="relative grid min-h-screen overflow-hidden" aria-roledescription="carousel" aria-label="Featured">
+        {/* Slide 1 — Ministry */}
+        <div
+          className={`col-start-1 row-start-1 relative flex items-center justify-center pt-56 pb-28 text-white transition-[opacity,visibility] duration-1000 ease-in-out ${heroSlide === 0 ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+          style={{backgroundImage: 'url(/nick-berger-ZS0sUE45oVQ-unsplash.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'}}
+          aria-hidden={heroSlide !== 0}
+        >
+          <div className="absolute inset-0 bg-warm-black/55"></div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+            <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-normal mb-12 tracking-wide leading-tight uppercase">
+              Dedicated to the One
+            </h1>
+            <p className="text-xl md:text-2xl mb-16 max-w-4xl mx-auto text-white/75 leading-relaxed">
+              "Three things will last forever — faith, hope and love — and the greatest of these is love." - 1 Corinthians 13:13
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a href="#about" className="px-12 py-6 bg-gold text-warm-black text-xl font-bold rounded-lg hover:bg-gold-light transition-colors">
+                Learn More
+              </a>
+              <a href="#contact" className="px-12 py-6 border-2 border-gold-light text-gold-light text-xl font-bold rounded-lg hover:bg-gold-light hover:text-warm-black transition-colors">
+                Join Us
+              </a>
+            </div>
           </div>
+        </div>
+
+        {/* Slide 2 — Book Launch */}
+        <div
+          className={`col-start-1 row-start-1 relative flex items-center justify-center pt-48 pb-28 md:pt-52 bg-[radial-gradient(ellipse_at_top,#ffffff_0%,var(--color-blush)_75%)] transition-[opacity,visibility] duration-1000 ease-in-out ${heroSlide === 1 ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+          aria-hidden={heroSlide !== 1}
+        >
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <Image
+              src="/twobabies_in_heaven_cover.png"
+              alt="Two Babies in Heaven — a book by Amy Newman"
+              width={1067}
+              height={1529}
+              className="mx-auto w-auto h-[32vh] min-h-[220px] max-h-[400px] rounded-sm shadow-2xl shadow-warm-dark/30 mb-10"
+              priority
+            />
+            <p className="text-mauve text-base md:text-lg font-semibold tracking-[0.25em] uppercase mb-4">
+              New Book Release
+            </p>
+            <h1 className="text-5xl md:text-7xl font-normal text-warm-dark tracking-wide uppercase leading-none mb-5">
+              Two Babies in Heaven
+            </h1>
+            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed mb-2">
+              A story of redemption, healing, and hope.
+            </p>
+            <p className="text-lg md:text-xl text-mauve mb-10">
+              by Amy Newman
+            </p>
+            <div className="flex flex-col sm:flex-row gap-5 justify-center">
+              <PurchaseLink className={bookPrimaryButton} />
+              <button onClick={() => setBookModalOpen(true)} className={bookSecondaryButton}>
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Arrows */}
+        <button
+          onClick={() => goToSlide(heroSlide - 1)}
+          aria-label="Previous slide"
+          className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 p-2 md:p-3 rounded-full bg-warm-black/40 hover:bg-warm-black/70 text-white/80 hover:text-gold-light transition-colors"
+        >
+          <ChevronLeftIcon className="h-7 w-7 md:h-9 md:w-9" />
+        </button>
+        <button
+          onClick={() => goToSlide(heroSlide + 1)}
+          aria-label="Next slide"
+          className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 p-2 md:p-3 rounded-full bg-warm-black/40 hover:bg-warm-black/70 text-white/80 hover:text-gold-light transition-colors"
+        >
+          <ChevronRightIcon className="h-7 w-7 md:h-9 md:w-9" />
+        </button>
+
+        {/* Dots */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-4">
+          {Array.from({ length: HERO_SLIDE_COUNT }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goToSlide(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              aria-current={heroSlide === i}
+              className={`h-3 w-3 rounded-full transition-all ${
+                heroSlide === 1
+                  ? (heroSlide === i ? 'bg-mauve w-8' : 'bg-warm-dark/25 hover:bg-warm-dark/50')
+                  : (heroSlide === i ? 'bg-gold-light w-8' : 'bg-white/40 hover:bg-white/70')
+              }`}
+            />
+          ))}
         </div>
       </section>
 
@@ -236,6 +381,65 @@ export default function Home() {
           <p className="text-center text-3xl text-warm-dark max-w-3xl mx-auto leading-relaxed">
             Together we serve with one aim: to show and share the reckless love of Christ.
           </p>
+        </div>
+      </section>
+
+      {/* Book — Two Babies in Heaven */}
+      <section id="book" className="py-32 bg-[radial-gradient(ellipse_at_top,#ffffff_0%,var(--color-blush)_75%)]">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <p className="text-mauve text-lg md:text-xl font-semibold tracking-[0.25em] uppercase mb-5">
+            New Book Release
+          </p>
+          <h2 className="text-6xl md:text-7xl font-black text-warm-dark mb-6">
+            Two Babies in Heaven
+          </h2>
+          <div className="w-32 h-2 bg-mauve mx-auto mb-8"></div>
+          <p className="text-2xl md:text-3xl text-warm-gray leading-relaxed mb-16">
+            A story of redemption, healing, and hope.
+          </p>
+
+          <Image
+            src="/twobabies_in_heaven_cover.png"
+            alt="Two Babies in Heaven — a book by Amy Newman"
+            width={1067}
+            height={1529}
+            className="mx-auto w-72 md:w-96 h-auto rounded-sm shadow-2xl shadow-warm-dark/30 mb-16"
+          />
+
+          <p className="text-xl md:text-2xl text-warm-gray leading-relaxed max-w-3xl mx-auto mb-12">
+            It is a story of lost life, new life, and the unshakable truth that God can redeem
+            even the darkest chapters of our story.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-5 justify-center mb-28">
+            <PurchaseLink className={bookPrimaryButton} />
+            <button onClick={() => setBookModalOpen(true)} className={bookSecondaryButton}>
+              Learn More
+            </button>
+          </div>
+
+          {/* About the Author */}
+          <div className="max-w-3xl mx-auto border-t border-mauve/20 pt-20">
+            <Image
+              src="/amy_newman_two_babies_in_heaven_author.jpeg"
+              alt="Amy Newman, author"
+              width={427}
+              height={640}
+              className="mx-auto w-48 md:w-56 h-auto rounded-2xl shadow-xl mb-10"
+            />
+            <h3 className="text-4xl md:text-5xl font-bold text-warm-dark mb-6">About the Author</h3>
+            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed mb-6">
+              Amy Newman is a wife, mother, evangelist, pastor, and author. She is a
+              co-founder and Vice President of Recklessly Loved Ministries, the
+              evangelistic ministry she founded with her husband in 2019.
+            </p>
+            <p className="text-xl md:text-2xl text-warm-gray leading-relaxed">
+              Her desire is to reach people from all walks of life with the gospel of Jesus
+              Christ and to see women find healing and freedom from abortion, miscarriage,
+              and infertility. Her hope is that this book will inspire women everywhere to
+              see children as the blessing they truly are, and that lives would be changed
+              through the power of an ever-present Savior, Jesus Christ.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -439,6 +643,57 @@ export default function Home() {
           © 2026 Recklessly Loved Ministries. All rights reserved.
         </p>
       </footer>
+
+      {/* Book Modal */}
+      {bookModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4" onClick={() => setBookModalOpen(false)}>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="book-modal-title"
+            className="relative w-full max-w-2xl max-h-[calc(100vh-2rem)] overflow-y-auto rounded-2xl bg-white p-8 md:p-12 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setBookModalOpen(false)}
+              aria-label="Close"
+              className="absolute top-4 right-4 p-2 text-warm-gray hover:text-warm-dark transition-colors"
+            >
+              <XMarkIcon className="h-7 w-7" />
+            </button>
+            <p className="text-mauve text-sm md:text-base font-semibold tracking-[0.25em] uppercase mb-3 text-center">
+              A story of redemption, healing, and hope
+            </p>
+            <h2 id="book-modal-title" className="text-5xl md:text-6xl font-normal uppercase tracking-wide text-warm-dark text-center mb-2">
+              Two Babies in Heaven
+            </h2>
+            <p className="text-lg text-mauve text-center mb-8">by Amy Newman</p>
+            <div className="space-y-5 text-lg md:text-xl text-warm-gray leading-relaxed">
+              <p>
+                She was searching for love, acceptance, and a place to belong. Instead, she found herself trapped in destructive relationships, addiction, abuse, and a decision that would haunt her for years.
+              </p>
+              <p>
+                When Sherri discovers she is pregnant, she makes a choice she believes will allow her to move forward with her life. Instead, the pain, guilt, and shame follow her into adulthood. She tries to outrun her past through relationships, career, success, partying, and drugs, but no matter how much she achieves, the emptiness remains.
+              </p>
+              <p className="font-bold uppercase tracking-wide text-warm-dark">
+                Then she encounters Jesus.
+              </p>
+              <p>
+                What begins as a desperate search for answers becomes a life-changing journey of faith, surrender, healing, and redemption. As Sherri learns to confront her past and trust God with her future, she discovers that her worst mistakes do not have the final word.
+              </p>
+              <p>
+                <em>Two Babies in Heaven</em> is a deeply personal testimony of the devastating consequences of broken choices and the extraordinary grace of a God who forgives, restores, and redeems.
+              </p>
+              <p>
+                It is a story of lost life, new life, and the unshakable truth that God can redeem even the darkest chapters of our story.
+              </p>
+            </div>
+            <div className="mt-10 text-center">
+              <PurchaseLink className={bookPrimaryButton} />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Donorbox Modal */}
       {donorboxOpen && (
