@@ -515,11 +515,11 @@ export default function Home() {
           </p>
 
           <Image
-            src="/twobabies_in_heaven_cover.png"
-            alt="Two Babies in Heaven — a book by Amy Newman"
-            width={1067}
-            height={1529}
-            className="mx-auto w-72 md:w-96 h-auto rounded-sm shadow-2xl shadow-warm-dark/30 mb-16"
+            src="/twobabies_in_heaven_blossoms.jpg"
+            alt="Two Babies in Heaven by Amy Newman, shown with white blossoms"
+            width={1800}
+            height={1239}
+            className="mx-auto w-full max-w-4xl h-auto rounded-2xl shadow-2xl shadow-warm-dark/25 mb-16"
           />
 
           <p className="text-xl md:text-2xl text-warm-gray leading-relaxed max-w-3xl mx-auto mb-12">
