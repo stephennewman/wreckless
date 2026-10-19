@@ -7,8 +7,8 @@ import { useState, useEffect, useCallback, type ReactNode } from "react";
 
 const FACEBOOK_PAGE_URL = "https://www.facebook.com/RecklesslyLoved1313";
 
-// Paste the publisher's purchase URL here. While empty, "Purchase Now" links render but do nothing.
-const BOOK_PURCHASE_URL = "";
+// Publisher checkout. While empty, "Purchase Now" links render but do nothing.
+const BOOK_PURCHASE_URL = "https://svc.lulu.com/?items=29ef061a-cbc9-44a2-8174-89702d4374d6";
 
 function PurchaseLink({ className, children = "Purchase Now" }: { className: string; children?: ReactNode }) {
   return (
