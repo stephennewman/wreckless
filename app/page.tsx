@@ -298,7 +298,7 @@ export default function Home() {
             <div>
               <h3 className="text-5xl font-bold text-warm-dark mb-8">Our Story</h3>
               <p className="text-2xl text-warm-gray leading-relaxed">
-                Recklessly Loved Ministries launched in 2019 when pastors Seth & Amy Newman answered God's call to ministry. Since then, we've served through church-based ministry and community outreach across states.
+                Recklessly Loved Ministries launched in 2019 when pastors Seth & Amy Newman answered God's call to ministry. Since then, Seth & Amy have served through church-based ministry and community outreach across states.
               </p>
             </div>
             <div>
